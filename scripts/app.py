@@ -1,7 +1,8 @@
-import pygame 
+import pygame
 from scripts.function import load_image
 from scripts.game import Game
 from scripts.constants import display_size
+from scripts.constants import CreatePlatformEvent
 
 
 class App():
@@ -10,7 +11,7 @@ class App():
         self.working = True
         self.FPS = 60
         self.scene = pygame.display.set_mode(display_size)
-        self.clock = pygame.time.Clock() 
+        self.clock = pygame.time.Clock()
         pygame.display.set_caption("DoodleJump")
         pygame.display.set_icon(load_image("assets", "icons", "icon.ico"))
         self.game = Game()
@@ -22,6 +23,10 @@ class App():
                 self.game.process_key_down_event(event.key)
             elif event.type == pygame.KEYUP:
                 self.game.process_key_up_event(event.key)
+
+            elif event.type == CreatePlatformEvent:
+                self.game.platforms.append(event.platform)
+
     def update(self):
         self.game.update_objects()
 

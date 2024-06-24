@@ -35,3 +35,9 @@ class Player(Sprite):
     def collide(self, other_rect):
         rect = pygame.Rect(self.rect.bottomleft,(self.rect.width, 20 ))
         return self.velocity_y > 0 and other_rect.colliderect(rect)
+    
+    def reset(self, coords):
+        super().__init__(self.original_image, coords)
+        self.is_walking_right = False
+        self.is_walking_left = False
+        self.velocity_y = 0
